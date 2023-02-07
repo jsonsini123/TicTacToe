@@ -6,8 +6,8 @@
  * Each position on the board is a Square object
  * which keeps track of the marker ("X", "O")
  *
- * @author: Nandhini Namasivayam
- * @version: Jan 2023
+ * @author: Nandhini Namasivayam, Jake Sonsini
+ * @version: Feb 2023
  */
 
 import java.util.Scanner;
@@ -34,6 +34,7 @@ public class TicTacToe
 
     private Square[][] board;
     private boolean isGameOver;
+    private TicTacToeViewer tic;
 
     /**
      * Constructor which initialized the board with BLANKs.
@@ -42,14 +43,14 @@ public class TicTacToe
      * The view is initialized with this TicTacToe object
      */
     public TicTacToe() {
-        // Initialize Squares in the board
+        // This initializes Squares in the board using for loop array
         this.board = new Square[3][3];
         for(int row = 0; row < this.board.length; row++) {
             for(int col = 0; col< this.board[row].length; col++) {
                 this.board[row][col] = new Square(row, col);
             }
         }
-
+        this.tic = new TicTacToeViewer(board);
         // Initialize winning stats variables
         this.isGameOver = false;
         this.turn = 0;
@@ -119,10 +120,14 @@ public class TicTacToe
             } else {
                 System.out.println("That space is taken, or you entered an invalid row/col");
             }
+            // Repaint board after every move
+            tic.repaint();
         }
 
         this.printBoard();
         this.isGameOver = true;
+        // Repaint board to show winning squares
+        tic.repaint();
 
         // Determine if there was a winner
         if(!this.checkWin()) {

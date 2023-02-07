@@ -1,3 +1,4 @@
+import java.awt.*;
 /**
  * A class written to support the TicTacToe Game.
  *
@@ -6,12 +7,14 @@
  * location on the board, and whether it is part
  * of the winning set.
  *
- * @author: Nandhini Namasivayam
- * @version: Jan 2023
+ * @author: Nandhini Namasivayam, Jake Sonsini
+ * @version: Feb 2023
  */
 
 public class Square {
-
+    private final int squareSize = 200;
+    private final int xShift = 200;
+    private final int yShift = 150;
     private String marker;
     private int row;
     private int col;
@@ -26,7 +29,6 @@ public class Square {
     public Square(int row, int col) {
         this.row = row;
         this.col = col;
-
         this.marker = TicTacToe.BLANK;
         this.isWinningSquare = false;
     }
@@ -57,5 +59,29 @@ public class Square {
      */
     public String toString() {
         return this.marker;
+    }
+    public void draw(Graphics g, TicTacToeViewer tic){
+        if (isWinningSquare == true){
+            g.setColor(Color.green);
+            g.fillRect(200 + squareSize * col, 150 + squareSize * row, squareSize, squareSize);
+            g.setColor(Color.black);
+            g.drawRect(xShift + squareSize * col, yShift + squareSize * row, squareSize, squareSize);
+            if (marker.equals("X")){
+                g.drawImage(tic.getImages()[1], xShift + squareSize * col, yShift + squareSize * row, squareSize, squareSize, tic);
+            }
+            else if (marker.equals("O")){
+                g.drawImage(tic.getImages()[0], xShift + squareSize * col, yShift + squareSize * row, squareSize, squareSize, tic);
+            }
+        }
+        else{
+            g.setColor(Color.black);
+            g.drawRect(xShift + squareSize * col, yShift + squareSize * row, squareSize, squareSize);
+            if (marker.equals("X")){
+                g.drawImage(tic.getImages()[1], xShift + squareSize * col, yShift + squareSize * row, squareSize, squareSize, tic);
+            }
+            if (marker.equals("O")){
+                g.drawImage(tic.getImages()[0], xShift + squareSize * col, yShift + squareSize * row, squareSize, squareSize, tic);
+            }
+        }
     }
 }
