@@ -21,7 +21,8 @@ public class TicTacToeViewer extends JFrame{
         XY[0] = new ImageIcon("Resources/O.png").getImage();
         XY[1] = new ImageIcon("Resources/X.png").getImage();
         this.board = board;
-        // Create the window
+        // Create the window with title
+        this.setTitle("Tic Tac Toe");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.setVisible(true);

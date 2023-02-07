@@ -62,20 +62,29 @@ public class Square {
     }
     public void draw(Graphics g, TicTacToeViewer tic){
         if (isWinningSquare == true){
+            // After determining whether this square is a winning square,
+            // set color to green and print green square
             g.setColor(Color.green);
             g.fillRect(200 + squareSize * col, 150 + squareSize * row, squareSize, squareSize);
+            // Then print the board outline and image
             g.setColor(Color.black);
             g.drawRect(xShift + squareSize * col, yShift + squareSize * row, squareSize, squareSize);
+            // This if statement checks which image to print
             if (marker.equals("X")){
                 g.drawImage(tic.getImages()[1], xShift + squareSize * col, yShift + squareSize * row, squareSize, squareSize, tic);
             }
             else if (marker.equals("O")){
                 g.drawImage(tic.getImages()[0], xShift + squareSize * col, yShift + squareSize * row, squareSize, squareSize, tic);
             }
+            // Set font and print winning message
+            g.setFont(new Font("Font", Font.ROMAN_BASELINE, 20));
+            g.drawString(marker + " Wins!", 500, 800);
         }
         else{
+            // Print the board outline and image
             g.setColor(Color.black);
             g.drawRect(xShift + squareSize * col, yShift + squareSize * row, squareSize, squareSize);
+            // This if statement checks which image to print
             if (marker.equals("X")){
                 g.drawImage(tic.getImages()[1], xShift + squareSize * col, yShift + squareSize * row, squareSize, squareSize, tic);
             }
